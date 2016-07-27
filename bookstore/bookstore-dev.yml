@@ -1,0 +1,46 @@
+hystrix:
+    command:
+        BookServiceCommandKey:
+            execution:
+                isolation:
+                    strategy : THREAD
+                    maxConcurrentRequests : 10	        
+                    thread:
+                        timeoutInMilliseconds : 1000
+                        interruptOnTimeout : true
+                timeout:
+                    enabled : true
+            fallback:
+                enabled : true
+            circuitBreaker:
+                enabled : true
+                requestVolumeThreshold : 20
+                sleepWindowInMilliseconds : 5000
+                errorThresholdPercentage : 50
+                forceOpen : false
+                forceClosed : false
+            metrics:
+                rollingStats:
+                    timeInMilliseconds : 10000
+                    numBuckets : 10
+                rollingPercentile:
+                    enabled : true
+                    timeInMilliseconds : 60000
+                    numBuckets : 6
+                    bucketSize : 100
+                healthSnapshot:
+                    intervalInMilliseconds : 500
+            requestCache:
+                enabled : true
+            requestLog:
+                enabled : true
+    threadpool:
+        BookServiceThreadPoolKey:
+            coreSize : 10
+            maxQueueSize : 101
+            queueSizeRejectionThreshold : 5
+            keepAliveTimeMinutes : 2
+            metrics:
+                rollingStats:
+                    numBuckets : 12
+                    timeInMilliseconds : 1440

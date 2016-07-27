@@ -1,0 +1,17 @@
+spring:
+    application:
+        name: bookstore
+        port: 8090
+    profiles:
+        active: dev, test, prod
+    cloud:
+        config:
+            uri: http://localhost:8888
+
+server:
+    port: 8090
+
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: http://localhost:8761/eureka/

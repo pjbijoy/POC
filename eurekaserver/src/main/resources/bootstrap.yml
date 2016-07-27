@@ -1,0 +1,21 @@
+spring:
+    application:
+        name: eurekaserver
+    profiles:
+        active: dev, test, prod
+    cloud:
+        config:
+            uri: http://localhost:8888
+            
+server:
+    port: 8761
+    
+eureka:
+    client:
+        registerWithEureka: false
+        fetchRegistry: false
+        server:
+            waitTimeInMsWhenSyncEmpty: 0
+        healthcheck:
+            enabled: true
+
