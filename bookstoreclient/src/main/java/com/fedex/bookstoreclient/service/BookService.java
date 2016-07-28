@@ -33,7 +33,7 @@ public class BookService {
 
 		String serviceUrl = getServiceUrl("BOOKSTORE");
 		logger.info("Server URL connecting to ->" + serviceUrl);
-		URI uri = URI.create(serviceUrl);
+		URI uri = URI.create(serviceUrl + "recommended");
 
 		return restTemplate.getForObject(uri, String.class);
 	}
