@@ -8,10 +8,8 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
-import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-@RestController
 @EnableCircuitBreaker
 @EnableHystrixDashboard
 @RefreshScope

@@ -14,7 +14,11 @@ public class Book {
 	
 	@PersistenceConstructor
 	public Book() {
-		this.id = String.valueOf(COUNTER.incrementAndGet());
+		if (id != null && id.trim().length() > 0) {
+			//Do nothing
+		} else {
+			this.id = String.valueOf(COUNTER.incrementAndGet());
+		}
 	}
 	
 	public String getBookName() {
