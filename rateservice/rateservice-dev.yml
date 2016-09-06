@@ -1,0 +1,82 @@
+destination : EJBRemote
+jndi:
+     name : CrsHome.v15
+ejb:
+    url : t3://crsvdev-wap.idev.fedex.com:7164
+service:
+    timeout:
+       threshold : 5
+       interval:
+             msecs : 30000
+    reset:
+        interval:
+             msecs : 20000			
+fast:
+    fail:
+        impl : timeout
+max:
+    concurrent:
+        connect:
+            attempts : 10
+        invoke:
+            attempts : 30
+cluster:
+    use:
+        type : PB
+    auto:
+        connection:
+            reconnect : true
+        timeout:
+            reconnect : false
+remote:
+    api:
+        id : APP41247
+token:
+    impl:
+         class : com.fedex.nxgen.servicefactory.v2.enterprise.LDAPAuthenticationProvider
+hystrix:
+    command:
+        RateSoapWsCommandKey:
+            execution:
+                isolation:
+                    strategy : THREAD
+                    maxConcurrentRequests : 10	        
+                    thread:
+                        timeoutInMilliseconds : 1000
+                        interruptOnTimeout : true
+                timeout:
+                    enabled : true
+            fallback:
+                enabled : true
+            circuitBreaker:
+                enabled : true
+                requestVolumeThreshold : 20
+                sleepWindowInMilliseconds : 5000
+                errorThresholdPercentage : 50
+                forceOpen : false
+                forceClosed : false
+            metrics:
+                rollingStats:
+                    timeInMilliseconds : 10000
+                    numBuckets : 10
+                rollingPercentile:
+                    enabled : true
+                    timeInMilliseconds : 60000
+                    numBuckets : 6
+                    bucketSize : 100
+                healthSnapshot:
+                    intervalInMilliseconds : 500
+            requestCache:
+                enabled : true
+            requestLog:
+                enabled : true
+    threadpool:
+        RateSoapWsThreadPoolKey:
+            coreSize : 10
+            maxQueueSize : 101
+            queueSizeRejectionThreshold : 5
+            keepAliveTimeMinutes : 2
+            metrics:
+                rollingStats:
+                    numBuckets : 12
+                    timeInMilliseconds : 1440
